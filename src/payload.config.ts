@@ -1,15 +1,18 @@
 import { buildConfig } from "payload";
-import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const isProduction = process.env.NODE_ENV === "production";
-const usePostgres = !!process.env.DATABASE_URL;
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+// Require DATABASE_URL in production
+if (isProduction && !process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is required in production");
+}
 
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "cms-admin-secret-change-in-production",
@@ -30,19 +33,12 @@ export default buildConfig({
     process.env.ALLOWED_ORIGINS?.split(","),
   ].flat().filter(Boolean) as string[],
 
-  db: usePostgres
-    ? postgresAdapter({
-        pool: {
-          connectionString: process.env.DATABASE_URL!,
-        },
-        push: !isProduction, // Auto-push in dev, use migrations in prod
-      })
-    : sqliteAdapter({
-        client: {
-          url: `file:${path.resolve(dirname, "../cms.db")}`,
-        },
-        push: false,
-      }),
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/cms",
+    },
+    push: !isProduction,
+  }),
 
   editor: lexicalEditor(),
 
