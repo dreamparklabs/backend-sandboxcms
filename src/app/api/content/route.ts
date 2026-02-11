@@ -96,10 +96,8 @@ export async function GET(req: NextRequest) {
         sort,
       });
 
-      const docs = result.docs.map((doc: Record<string, unknown>) => {
-        const { site: _site, ...rest } = doc;
-        return rest;
-      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const docs = result.docs.map(({ site, ...rest }) => rest);
 
       return NextResponse.json({
         data: docs,
