@@ -9,11 +9,6 @@ const isProduction = process.env.NODE_ENV === "production";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-// Require DATABASE_URL in production
-if (isProduction && !process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is required in production");
-}
-
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "cms-admin-secret-change-in-production",
 
