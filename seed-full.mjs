@@ -1,7 +1,7 @@
-const BASE = "http://localhost:3001";
+const BASE = "https://sandboxcms-production.up.railway.app";
 
 async function getToken() {
-  const res = await fetch(BASE + "/api/users/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: "mccullca1@gmail.com", password: "admin123" }) });
+  const res = await fetch(BASE + "/api/users/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: "mccullca1@gmail.com", password: "@CamSyd0922Grad2028!" }) });
   return (await res.json()).token;
 }
 

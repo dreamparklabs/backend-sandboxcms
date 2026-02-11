@@ -12,9 +12,9 @@
 
 const CMS_URL = "https://sandboxcms-production.up.railway.app";
 
-// Admin credentials - CHANGE THESE!
-const ADMIN_EMAIL = "admin@cameronmccullough.com";
-const ADMIN_PASSWORD = "ChangeThisPassword123!";
+// Admin credentials
+const ADMIN_EMAIL = "mccullca1@gmail.com";
+const ADMIN_PASSWORD = "@CamSyd0922Grad2028!";
 
 async function api(endpoint, token, body) {
   const res = await fetch(`${CMS_URL}${endpoint}`, {
