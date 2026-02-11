@@ -32,7 +32,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/cms",
     },
-    push: !isProduction,
+    push: true, // Auto-push schema changes
   }),
 
   editor: lexicalEditor(),
