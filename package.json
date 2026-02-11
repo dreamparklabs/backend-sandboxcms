@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "next dev -p 3001",
-    "build": "next build",
+    "build": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts next build",
     "start": "next start -p 3001",
     "generate:types": "payload generate:types",
     "payload": "payload",
     "migrate": "payload migrate",
-    "migrate:create": "payload migrate:create"
+    "migrate:create": "payload migrate:create",
+    "db:push": "npx drizzle-kit push"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.76.0",
@@ -28,6 +29,7 @@
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "cross-env": "^10.1.0",
     "typescript": "^5.8.0"
   }
 }
