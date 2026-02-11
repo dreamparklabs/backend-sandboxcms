@@ -1,0 +1,22 @@
+# Cloudflare Tunnel Configuration
+# 
+# Setup Instructions:
+# 1. Install cloudflared: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/
+# 2. Login: cloudflared tunnel login
+# 3. Create tunnel: cloudflared tunnel create cms-api
+# 4. Route DNS: cloudflared tunnel route dns cms-api cms-api.yourdomain.com
+# 5. Copy this file to ~/.cloudflared/config.yml (or specify with --config flag)
+# 6. Run: cloudflared tunnel run cms-api
+
+tunnel: <YOUR_TUNNEL_ID>  # Replace with your tunnel ID from step 3
+credentials-file: ~/.cloudflared/<YOUR_TUNNEL_ID>.json
+
+ingress:
+  # Route all traffic to the Payload CMS service
+  - hostname: cms-api.yourdomain.com  # Replace with your subdomain
+    service: http://localhost:3001
+    originRequest:
+      noTLSVerify: false
+  
+  # Catch-all rule (required)
+  - service: http_status:404

@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Build
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database (local SQLite)
+*.db
+*.db-journal
+
+# Misc
+.DS_Store
+._*
+*.pem
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Payload
+public/media/*
+!public/media/.gitkeep
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Migration scripts (temporary)
+migrate-add-columns.mjs
